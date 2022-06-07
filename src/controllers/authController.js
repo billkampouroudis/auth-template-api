@@ -1,9 +1,8 @@
 import STATUS from '../constants/statusCodes';
 import { successResponse, errorResponse } from '../utils/response';
 import findError from '../utils/errorHandling';
-import { loginService } from '../services/authService';
+import { loginService, registerService } from '../services/authService';
 import { loginSchema, registrationSchema } from '../validation/authValidation';
-import { createUserService } from '../services/userService';
 
 export async function login(req, res) {
   try {
@@ -29,11 +28,10 @@ export async function register(req, res) {
     };
 
     await registrationSchema.validateAsync({ ...userData, registrationCode });
-    const user = await createUserService(userData, registrationCode, true);
 
-    const token = await loginService(user.dataValues.email, user.dataValues.password, true);
+    const result = await registerService(userData, registrationCode);
 
-    return successResponse(STATUS.HTTP_200_OK, { token }, res);
+    return successResponse(STATUS.HTTP_200_OK, result, res);
   } catch (error) {
     return errorResponse(findError(error), res);
   }

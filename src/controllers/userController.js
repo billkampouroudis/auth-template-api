@@ -52,57 +52,6 @@ export async function updateUser(req, res) {
   }
 }
 
-// export async function createUserInvitation(req, res) {
-//   const {
-//     firstName, lastName, email, invitation
-//   } = req.body;
-
-//   const { authenticatedUser } = req;
-
-//   try {
-//     await createUserInvitationSchema.validateAsync({
-//       firstName, lastName, email, invitation
-//     });
-
-//     const createdUser = await createUserService({
-//       firstName,
-//       lastName,
-//       email,
-//       password: DEFAULT_USER_PASSWORD,
-//       userStatusId: 1
-//     });
-
-//     const mailOptions = {
-//       from: process.env.EMAIL_HOST_USER,
-//       to: req.body.email,
-//       subject: 'Πρόσκληση χρήστη',
-//       html: `
-//         <div style="font-size: 16px;">
-//           <p>
-//             Ο χρήστης ${authenticatedUser.lastName} ${authenticatedUser.firstName} σας προσκάλεσε στην εφαρμογή
-//           </p>
-
-//           <p>
-//           ${invitation || ''}
-//           </p>
-
-//           </br>
-
-//           <a href="${process.env.WEB_APP_URL}/invitations/${createdUser.id}">
-//             Πατήστε εδώ για να συνδεθείτε.
-//           </a>
-//         </div>
-//       `
-//     };
-
-//     await createUserInvitaionService(mailOptions);
-
-//     return successResponse(STATUS.HTTP_200_OK, null, res);
-//   } catch (error) {
-//     return errorResponse(findError(error), res);
-//   }
-// }
-
 export async function getUser(req, res) {
   try {
     const userId = parseInt(req.params.userId, 10);

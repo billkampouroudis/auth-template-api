@@ -2,7 +2,7 @@
 import { dataTypes } from '../config/sequelize';
 import { User } from './User';
 
-const { STRING, INTEGER } = dataTypes;
+const { STRING, INTEGER, BOOLEAN } = dataTypes;
 
 let Invitation;
 const initInvitation = async (sequelize) => {
@@ -28,6 +28,11 @@ const initInvitation = async (sequelize) => {
         type: STRING(),
         allowNull: false,
         unique: true
+      },
+      status: {
+        type: BOOLEAN,
+        allowNull: false,
+        defaultValue: false
       },
       userId: {
         type: INTEGER.UNSIGNED,

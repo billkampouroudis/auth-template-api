@@ -1,5 +1,5 @@
 import { models } from '../models';
-import { BadRequestError, ForbiddenError, UnauthorizedError } from '../constants/errors';
+import { BadRequestError, ForbiddenError } from '../constants/errors';
 import { addPagination } from '../utils/pagination';
 import { authSerializer } from '../serializers/AuthSerializer';
 // import mailer from '../utils/promiseMailer';
@@ -11,13 +11,8 @@ import { authSerializer } from '../serializers/AuthSerializer';
  * @param {boolean} safe Indicates if the return value is safe to contain the user's password
  * @returns {object} The newly created user
  */
-export async function createUserService(userData, registrationCode, safe) {
-  const { User, Invitation } = models;
-
-  const isRegistrationCodeCorrect = !!await Invitation.findOne({ where: { email: userData.email, registrationCode } });
-  if (!isRegistrationCodeCorrect) {
-    throw new UnauthorizedError();
-  }
+export async function createUserService(userData, safe) {
+  const { User } = models;
 
   const user = await User.create(userData);
 

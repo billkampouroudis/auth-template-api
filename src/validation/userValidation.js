@@ -30,9 +30,6 @@ export const createSchema = Joi.object({
     .min(rules.defaultPasswordLength)
     .required(),
 
-  registrationCode: Joi.string()
-    .required(),
-
   avatar: Joi.object({
     fieldname: Joi.string(),
     originalname: Joi.string(),
