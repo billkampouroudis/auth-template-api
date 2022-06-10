@@ -29,7 +29,7 @@ export async function register(req, res) {
 
     await registrationSchema.validateAsync({ ...userData, registrationCode });
 
-    const result = await registerService(userData, registrationCode);
+    const result = await registerService(userData, registrationCode, { t: req.t });
 
     return successResponse(STATUS.HTTP_200_OK, result, res);
   } catch (error) {

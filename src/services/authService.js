@@ -46,9 +46,11 @@ export async function loginService(email, password, encryptedPassword) {
  * Creates the new user and if there is an invitation it changes it's status.
  * @param {object} userData
  * @param {string} registrationCode
+ * @param {object} options
  * @returns {object} The signed JWT and the created user
  */
-export async function registerService(userData, registrationCode) {
+export async function registerService(userData, registrationCode, options) {
+  const { t } = options;
   const { Invitation } = models;
   let invitation;
 
@@ -63,7 +65,7 @@ export async function registerService(userData, registrationCode) {
 
     // If no invitation found, there is no invitation or the user has already used it and it can not be used again
     if (!invitation) {
-      throw new ForbiddenError();
+      throw new ForbiddenError(t('This invitation is invalid or has expired'));
     }
   }
 

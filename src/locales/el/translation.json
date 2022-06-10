@@ -1,3 +1,5 @@
 {
-  "Your invitaion is incorrect or has expired": "Η πρόσκλησή σας είναι λανθασμένη ή έχει λήξει"
+  "This invitation is invalid or has expired": "Η πρόσκλησή σας είναι λανθασμένη ή έχει λήξει",
+  "User Invitation": "Πρόσκληση χρήστη",
+  "User {{lastName}} {{firstName}} invited you to the app.": "Ο χρήστης {{lastName}} {{firstName}} σας προσκάλεσε στην εφαρμογή."
 }

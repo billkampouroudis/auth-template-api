@@ -12,11 +12,11 @@ import {
 } from '../services/invitationService';
 import { paginationValues } from '../utils/pagination';
 import { prepareListOptions } from '../utils/prepareOptions';
+import invitationTemplate from '../emails/invitationTemplate';
 
 export async function createInvitation(req, res) {
   try {
     const invitationData = { ...req.body };
-    const { authenticatedUser } = req;
 
     await createSchema.validateAsync(invitationData);
     const invitation = await createInvitationService(invitationData);
@@ -24,20 +24,8 @@ export async function createInvitation(req, res) {
     const mailOptions = {
       from: process.env.EMAIL_HOST_USER,
       to: req.body.email,
-      subject: 'Πρόσκληση χρήστη',
-      html: `
-        <div style="font-size: 16px;">
-          <p>
-            Ο χρήστης ${authenticatedUser.lastName} ${authenticatedUser.firstName} σας προσκάλεσε στην εφαρμογή
-          </p>
-
-          </br>
-
-          <a href="${process.env.WEB_APP_URL}/invitations/${invitation.registrationCode}">
-            Πατήστε εδώ για να συνδεθείτε.
-          </a>
-        </div>
-      `
+      subject: req.t('User Invitation'),
+      html: invitationTemplate(req, invitation)
     };
 
     await sendInvitation(mailOptions);

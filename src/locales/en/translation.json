@@ -1,3 +1,5 @@
 {
-  "Your invitaion is incorrect or has expired": "Your invitaion is incorrect or has expired"
+  "This invitation is invalid or has expired": "This invitation is invalid or has expired",
+  "User Invitation": "User Invitation",
+  "User {{lastName}} {{firstName}} invited you to the app.": "User {{lastName}} {{firstName}} invited you to the app."
 }
