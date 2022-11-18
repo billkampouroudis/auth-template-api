@@ -1,6 +1,5 @@
 import express from 'express';
 import { urlencoded, json } from 'body-parser';
-import cors from 'cors';
 import i18next from 'i18next';
 import i18nextMiddleware from 'i18next-http-middleware';
 import i18nextBackend from 'i18next-fs-backend';
@@ -14,15 +13,14 @@ import userRoutes from './src/routes/userRoutes';
 import invitationRoutes from './src/routes/invitationRoutes';
 
 const app = express();
+const cors = require('cors');
 
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
 initPassport();
 
-app.use(cors());
-
-// app.use(express.static('public'));
+app.use(cors({ origin: ['http://localhost:3000'] }));
 
 i18next
   .use(i18nextBackend)

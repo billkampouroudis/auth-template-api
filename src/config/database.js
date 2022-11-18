@@ -9,10 +9,11 @@ const loadFixtures = async () => {
   const fixturesPath = '../models/fixtures';
   const directoryPath = path.join(__dirname, fixturesPath);
   fs.readdir(directoryPath, async (err, files) => {
-    if (err) {
-      throw err;
-    }
     try {
+      if (err) {
+        throw err;
+      }
+
       await sequelizeFixtures.loadFile(
         path.join(directoryPath, files.filter((file) => file === 'index.js')[0]),
         models
